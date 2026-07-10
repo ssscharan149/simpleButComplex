@@ -2,13 +2,17 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.model.Expense;
 import com.example.demo.service.ExpenseService;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -24,5 +28,21 @@ public class ExpenseController {
     // return;
     return expenseService.getAllExpenses();
   }
+
+  @GetMapping("/getOneExpense/{date}")
+  public Expense getExpenseByDate(@PathVariable LocalDate date) {
+    return expenseService.getExpenseByDate(date);
+  }
+
+  @PutMapping("/{id}")
+  public Expense updateExpense(@PathVariable Long id, @RequestBody Expense expense) {
+    return expenseService.updateExpense(id, expense);
+  }
+
+  @PostMapping("createExpense")
+  public Expense createExpense(@RequestBody Expense expense) {
+    return expenseService.createExpense(expense);
+  }
+  
   
 }
