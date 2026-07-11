@@ -20,8 +20,8 @@ public class ExpenseService {
     return expenseRepo.findAll();
   }
 
-  public Expense getExpenseByDate(LocalDate date){
-    return expenseRepo.getExpenseByDate(date);
+  public List<Expense> getExpenseByDate(LocalDate date){
+    return expenseRepo.getAllExpensesByDate(date);
   }
 
   public Expense updateExpense(Long id, Expense expense){

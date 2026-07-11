@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.model.Expense;
@@ -29,20 +31,25 @@ public class ExpenseController {
     return expenseService.getAllExpenses();
   }
 
-  @GetMapping("/getOneExpense/{date}")
-  public Expense getExpenseByDate(@PathVariable LocalDate date) {
+  @GetMapping("/getAllExpensesByDate/{date}")
+  public List<Expense> getExpenseByDate(@PathVariable LocalDate date) {
     return expenseService.getExpenseByDate(date);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("updateExpense/{id}")
   public Expense updateExpense(@PathVariable Long id, @RequestBody Expense expense) {
     return expenseService.updateExpense(id, expense);
   }
 
   @PostMapping("createExpense")
-  public Expense createExpense(@RequestBody Expense expense) {
-    return expenseService.createExpense(expense);
+  public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) {
+    Expense createdUser = expenseService.createExpense(expense);
+    return ResponseEntity.ok(createdUser);
+    // return ResponseEntity.ok(null);
   }
   
-  
+  @DeleteMapping("deleteExpense/{id}")
+  public Expense deleteExpense(@PathVariable Long id){
+    return expenseService.deleteExpense(id);
+  }
 }
