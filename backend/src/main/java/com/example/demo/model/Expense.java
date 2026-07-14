@@ -26,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class Expense {
+public class Expense { //need to add mode of payment as a field in this.
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
